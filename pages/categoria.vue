@@ -2,22 +2,22 @@
   <div
     class="flex flex-row justify-center flex-grow bg-slate-50 relative max-sm:w-full"
   >
-    <SidebarProvider
-      class="lg:min-w-[95ch]  max-sm:w-full"
-      >
-      <Sidebar collapsible="icon" variant="sidebar" 
-      class="absolute"
+    <SidebarProvider class="lg:min-w-[95ch] max-sm:w-full">
+      <Sidebar
+        collapsible="icon"
+        variant="sidebar"
+        class="absolute"
       >
         <SidebarHeader class="h-16 flex justify-center">
-          <SidebarMenu >
+          <SidebarMenu>
             <SidebarMenuItem>
-              <Collapsible >
+              <Collapsible>
                 <CollapsibleTrigger as-child>
                   <SidebarMenuButton
                     :tooltip="'Categorias'"
                   >
-                  <Filter />
-                  <span>Categorias</span>
+                    <Filter />
+                    <span>Categorias</span>
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
               </Collapsible>
@@ -25,9 +25,9 @@
           </SidebarMenu>
         </SidebarHeader>
         <Separator
-              orientation="horizontal"
-              class="h-px w-full bg-slate-200"
-            />
+          orientation="horizontal"
+          class="h-px w-full bg-slate-200"
+        />
         <SidebarContent>
           <SidebarGroup>
             <SidebarMenu>
@@ -38,19 +38,26 @@
                 class="group/collapsible"
               >
                 <SidebarMenuItem
-                @click="navigateTo(`/categoria/${category.slug}/entries`)"
+                  @click="
+                    navigateTo(
+                      `/categoria/${category.slug}/entries`
+                    )
+                  "
                 >
-                    <SidebarMenuButton
-                      :tooltip="category.name"
-                    >
-                      <BookOpen />
-                      <span>{{ category.name }}</span>
-                      <ChevronRight
-                      
-                        class="ml-auto transition-transform duration-200"
-                        :class="{ 'rotate-90': category.slug !== $route.params.categoria }"
-                      />
-                    </SidebarMenuButton>
+                  <SidebarMenuButton
+                    :tooltip="category.name"
+                  >
+                    <BookOpen />
+                    <span>{{ category.name }}</span>
+                    <ChevronRight
+                      class="ml-auto transition-transform duration-200"
+                      :class="{
+                        'rotate-90':
+                          category.slug !==
+                          $route.params.categoria,
+                      }"
+                    />
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
               </Collapsible>
             </SidebarMenu>
@@ -108,7 +115,7 @@
                           :alt="data.user.name"
                         />
                         <AvatarFallback class="rounded-lg">
-                          JK
+                          DNK
                         </AvatarFallback>
                       </Avatar>
                       <div
@@ -118,14 +125,14 @@
                           class="truncate font-semibold"
                           >{{ data.user.name }}</span
                         >
-                        <span class="truncate text-xs">{{
-                          data.user.email
-                        }}</span>
+                        <span class="truncate text-xs"
+                          >danilo@ldanilo.co</span
+                        >
                       </div>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-              
+
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
                       <BadgeCheck />
@@ -145,9 +152,7 @@
         <SidebarRail />
       </Sidebar>
 
-      <SidebarInset
-      class="w-auto"
-      >
+      <SidebarInset class="w-auto">
         <header
           class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-16"
         >
@@ -168,25 +173,21 @@
                   class="hidden md:block"
                 />
                 <BreadcrumbItem>
-                  <BreadcrumbPage
-                    > {{ selectedCategory  }} </BreadcrumbPage
-                  >
+                  <BreadcrumbPage>
+                    {{ selectedCategory }}
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-          <NuxtPage />
+        <NuxtPage />
       </SidebarInset>
     </SidebarProvider>
-
   </div>
 </template>
 
-
-
 <script setup>
-
 import {
   AudioWaveform,
   BadgeCheck,
@@ -216,9 +217,12 @@ import {
 const categories = useExampleData();
 
 const selectedCategory = computed(() => {
-  return categories.find(
-    (category) => category.slug === useRoute().params.categoria
-  )?.name || '';
+  return (
+    categories.find(
+      (category) =>
+        category.slug === useRoute().params.categoria
+    )?.name || ''
+  );
 });
 
 const data = {
@@ -228,5 +232,4 @@ const data = {
     avatar: '/avatars/shadcn.jpg',
   },
 };
-
 </script>
